@@ -4,12 +4,26 @@ module.exports = function(app) {
 
 
 
+app.get('/user1', function (req, res) {
 
-//set routes for bootstrap
-app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); // redirect bootstrap JS
-app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist')); // redirect JS jQuery
-app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
-app.use('/css', express.static(__dirname + '/css/')); // redirect CSS
+console.log('James');
+
+  var User       = require('./models/user.js');
+
+  var fluffy = new User({ password: 'Silence' });
+  //fluffy.password = 'james';
+  fluffy.username = 'userjames1';
+  fluffy.save(function (err, fluffy) {
+    console.log('James2');
+    if (err) return console.error(err);
+
+
+  });
+
+console.log('James1');
+  res.status(200);
+
+});
 
 
 
