@@ -1,6 +1,9 @@
 var express = require('express');
 var app = express();
 var bodyParser  = require('body-parser');
+var session = require('express-session');
+var passport = require('passport');
+require('./config/passport')(passport);
 
 
 // set up the handlebars templating
@@ -12,6 +15,8 @@ app.set('view engine', 'hb');
 // use body parser so we can get info from POST and/or URL parameters
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(passport.initialize()); // needed for passport
+
 
 
 
@@ -33,6 +38,11 @@ app.use(function(req,res,next){
     req.db = db;
     next();
 });
+
+
+
+
+
 
 
 // app routes
@@ -92,11 +102,13 @@ app.get('/login', function (req, res) {
    res.render('login');
 });
 
-//handle the login
-app.post('/login', function (req, res) {
-   res.json(req.body);
-});
-
+app.post('/login',
+  passport.authenticate('local'),
+  function(req, res) {
+    // If this function gets called, authentication was successful.
+    // `req.user` contains the authenticated user.
+    res.redirect('/users/' + req.user.username);
+  });
 
 // create the server and listen
 var server = app.listen(8000, function () {
