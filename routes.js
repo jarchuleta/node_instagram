@@ -2,25 +2,37 @@ var passport = require('passport');
 
 module.exports = function(app) {
 
+app.get('/user2', function (req, res) {
+  var User       = require('./models/user.js');
+  var username = 'user';
+  User.find({ username: username }, function(err, user) {
+    console.log('here');
+    console.log(user);
+  });
+});
 
 
 app.get('/user1', function (req, res) {
 
-console.log('James');
 
   var User       = require('./models/user.js');
 
-  var fluffy = new User({ password: 'Silence' });
+  var words = ['Bones', 'Psych', 'BigBangTheory', 'Mad Men',
+  'Breaking Bad', 'Modern Family', 'Game of Thrones', 'Dexter'];
+
+  var word1 = words[Math.floor(Math.random() * words.length)];
+  var word2 = 'james';
+
+  var myUser = new User({ username: word1});
+  myUser.SaveHash(word2)
   //fluffy.password = 'james';
-  fluffy.username = 'userjames1';
-  fluffy.save(function (err, fluffy) {
-    console.log('James2');
+
+  myUser.save(function (err, fluffy) {
     if (err) return console.error(err);
 
 
   });
 
-console.log('James1');
   res.status(200);
 
 });
@@ -84,12 +96,14 @@ app.get('/login', function (req, res) {
    res.render('login');
 });
 
+/*
 app.post('/login',
   passport.authenticate('local'),
   function(req, res) {
+
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
     res.redirect('/users/' + req.user.username);
-  });
+  });*/
 
 };

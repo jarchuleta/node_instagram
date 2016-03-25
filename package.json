@@ -13,6 +13,8 @@
   "author": "James Archuleta <james.archuleta@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^0.8.5",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.0",
     "bootstrap": "^3.3.6",
     "cookie-parser": "^1.4.1",

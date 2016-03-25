@@ -1,9 +1,19 @@
 var mongoose = require('mongoose');
+var bcrypt   = require('bcrypt-nodejs');
 
-var kittySchema = mongoose.Schema({
+var userSchema = mongoose.Schema({
     username: String,
-    password: String,
+    passwordHash: String,
 });
 
 
-module.exports = mongoose.model('User', kittySchema);
+userSchema.methods.SaveHash = function(password) {
+    this.passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+userSchema.methods.IsPasswordCorrect = function(password) {
+    return bcrypt.compareSync(password, this.passwordHash);
+};
+
+
+module.exports = mongoose.model('User', userSchema);

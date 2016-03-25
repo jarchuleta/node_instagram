@@ -54,6 +54,18 @@ app.use(function(err, req, res, next) {
   res.status(500).send('Something broke!<br>' + err);
 });
 
+app.post('/login',
+  passport.authenticate('local'),
+  function(req, res) {
+
+    // If this function gets called, authentication was successful.
+    // `req.user` contains the authenticated user.
+    //res.redirect('/users/' + req.user.username);
+    res.redirect('/login/' );
+  });
+
+
+
 // create the server and listen
 var server = app.listen(8000, function () {
 
