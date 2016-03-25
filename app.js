@@ -4,8 +4,8 @@ var bodyParser  = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
 
-require('./config/passport')(passport);
-require('./routes.js')(app);
+
+
 
 
 // Database connection code
@@ -23,7 +23,7 @@ db.once('open', function() {
 
 // set up the handlebars templating
 var exphbs  = require('express-handlebars');
-app.locals.title = "Login page";
+app.locals.title = "Application";
 app.engine('hb', exphbs({defaultLayout: 'main.hb'}));
 app.set('view engine', 'hb');
 
@@ -41,7 +41,6 @@ app.use(function(req,res,next){
     next();
 });
 
-
 //set routes for bootstrap
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); // redirect bootstrap JS
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist')); // redirect JS jQuery
@@ -54,17 +53,9 @@ app.use(function(err, req, res, next) {
   res.status(500).send('Something broke!<br>' + err);
 });
 
-app.post('/login',
-  passport.authenticate('local'),
-  function(req, res) {
 
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user.
-    //res.redirect('/users/' + req.user.username);
-    res.redirect('/login/' );
-  });
-
-
+require('./config/passport')(passport);
+require('./routes.js')(app);
 
 // create the server and listen
 var server = app.listen(8000, function () {

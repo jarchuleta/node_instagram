@@ -4,16 +4,17 @@
 
 <div class="row">
 <div class="col-lg-12">
+
+
             <div class="well bs-component form-signin">
+
               <form class="" method="post">
                 <fieldset>
 
-
-
                   <div class="form-group">
-                    <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                    <label for="inputEmail" class="col-lg-2 control-label">Username / Email</label>
                     <div class="col-lg-10">
-                      <input type="text" class="form-control" id="inputEmail" placeholder="Email" name="email">
+                      <input type="text" class="form-control" id="inputEmail" placeholder="Email" name="username">
                     </div>
                   </div>
                   <div class="form-group">

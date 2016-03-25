@@ -9,11 +9,11 @@
                 <fieldset>
 
                   <div class="col-lg-10">
-                    <a id="create" href="/user"> Create New User</a>
+                    <a id="create" href="/createUser"> Create New User</a>
                   </div>
 
                   <div class="form-group">
-                    <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                    <label for="inputEmail" class="col-lg-2 control-label">Username / Email</label>
                     <div class="col-lg-10">
                       <input type="text" class="form-control" id="inputEmail" placeholder="Email" name="username">
                     </div>
