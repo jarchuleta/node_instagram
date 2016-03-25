@@ -2,20 +2,23 @@
 var LocalStrategy=require('passport-local').Strategy;
 
 module.exports=function(passport) {
+    // serializeUser is needed for passport
     passport.serializeUser(function(user, done) {
         done(null, user);
     });
 
+    //deserializeUser is needed for passport
     passport.deserializeUser(function(user, done) {
-        console.log('test');
         done(null, user);
     });
 
     passport.use(new LocalStrategy( function(username, password, done) {
         // get our model
         var User=require('../models/user.js');
+
         // here we can manually check user password
         // or use the database
+        /*
         if ( username=="user" && password=="pass") {
             return done(null, true);
         }
@@ -24,8 +27,9 @@ module.exports=function(passport) {
                 message: 'Incorrect username.'
             }
             );
-        }
-        // search the users databse for a user with the corresponding user name
+        }*/
+
+        // search the users database for a user with the corresponding user name
         User.findOne( {
             'username': username
         }
@@ -51,8 +55,7 @@ module.exports=function(passport) {
             }
             // user exists and password is right
             return done(null, true);
-        }
-        );
+        });
     }
     ));
 };
